@@ -24,11 +24,7 @@ class ImagesParser implements Parser
         $fileList = glob($this->path . "/*.{jpg,gif,png}", GLOB_BRACE);
 
         foreach ($fileList as $file) {
-            list($width, $height) = getimagesize("$file");
-
-            $this->images[basename($file)][] = basename($file);
-            $this->images[basename($file)][] = $width;
-            $this->images[basename($file)][] = $height;
+            $this->images[] = new Image($file);
         }
 
         return $this->images;
