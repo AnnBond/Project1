@@ -1,10 +1,7 @@
 <?php
-
 namespace App;
 
-
-interface Parser {
-
-    public function getFiles();
-
+interface Parser
+{
+    public function getFiles(): array;
 }

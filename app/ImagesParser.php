@@ -1,23 +1,29 @@
 <?php
-
 namespace App;
 
-
-class ImagesParser implements Parser {
-
+class ImagesParser implements Parser
+{
     protected $path;
     protected $images;
 
-    public function __construct($path)
+    /**
+     * ImagesParser constructor. set path
+     * @param string $path
+     */
+    public function __construct(string $path)
     {
         $this->path = $path;
     }
 
-    public function getFiles()
+    /**
+     * go through all image files in path directory and store each in array
+     * @return array
+     */
+    public function getFiles(): array
     {
-        $fileList = glob($this->path."/*.{jpg,gif,png}", GLOB_BRACE);
+        $fileList = glob($this->path . "/*.{jpg,gif,png}", GLOB_BRACE);
 
-        foreach($fileList as $file) {
+        foreach ($fileList as $file) {
             list($width, $height) = getimagesize("$file");
 
             $this->images[basename($file)][] = basename($file);
@@ -27,7 +33,6 @@ class ImagesParser implements Parser {
 
         return $this->images;
     }
-
 }
 
 

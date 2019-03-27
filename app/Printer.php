@@ -1,11 +1,8 @@
 <?php
-
 namespace App;
 
-
-interface Printer {
-
+interface Printer
+{
     public function print();
-
 }
 
