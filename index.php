@@ -1,16 +1,22 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
 
+use App\ExecutionTime;
 use App\ImagesParser;
 use App\ImagesPrinter;
 
-$time = new App\ExecutionTime();
-$time->start();
+try {
+    $time = new ExecutionTime();
+    $time->start();
 
-$imageParser = new ImagesParser('resources/files');
-$imageInfo = new ImagesPrinter($imageParser->getFiles());
+    $imageParser = new ImagesParser('resources/files');
+    $imageInfo = new ImagesPrinter($imageParser->getFiles());
 
-echo $imageInfo->print();
+    echo $imageInfo->print();
 
-$time->end();
-echo $time->getExecutionTime();
+    $time->end();
+    echo $time->getExecutionTime();
+
+} catch (Exception $e) {
+    echo 'Exception: ', $e->getMessage(), "\n";
+}
