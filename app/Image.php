@@ -1,119 +1,97 @@
 <?php
 namespace App;
 
-class Image
+use InvalidArgumentException;
+
+abstract class Image
 {
     protected $name;
     protected $path;
     protected $width;
     protected $height;
-    protected $type;
+    protected $mimeString;
+    protected $resource;
 
+    /**
+     * Image constructor.
+     * @param $path
+     */
     public function __construct($path)
     {
         $this->path = $path;
-        $this->setHeight();
-        $this->setWidth();
-        $this->setName();
-        $this->setType();
-    }
-
-    /**
-     * @return string
-     */
-    public function setName()
-    {
-        return $this->name = basename($this->path);
+        $this->mimeString = mime_content_type($path);
     }
 
     /**
      * @return mixed
      */
-    public function getName()
+    private function getName() : string
     {
+        $this->name = basename($this->path);
+
         return $this->name;
     }
 
     /**
      * @return mixed
      */
-    public function setWidth()
+    private function getWidth() : string
     {
         $data = getimagesize($this->path);
-        return $this->width = $data[0];
-    }
+        $this->width = $data[0];
 
-    /**
-     * @return mixed
-     */
-    public function getWidth()
-    {
         return $this->width;
     }
 
     /**
      * @return mixed
      */
-    public function setHeight()
+    private function getHeight() : string
     {
         $data = getimagesize($this->path);
-        return $this->height = $data[1];
-    }
+        $this->height = $data[1];
 
-    /**
-     * @return mixed
-     */
-    public function getHeight()
-    {
         return $this->height;
     }
 
     /**
-     * @return mixed
+     * print information about image
      */
-    public function getPath(){
-        return $this->path;
+    public function getInfo()
+    {
+        echo "File name: ". $this->getName() . ";";
+        echo " Width: ".  $this->getWidth() . ";";
+        echo " Height: ". $this->getheight() . ";";
+        echo "\n";
     }
 
     /**
-     * @return string
+     * @return resource
      */
-    public function setType()
+    protected function getResource() : resource
     {
-        return $this->type = mime_content_type($this->path);
+        switch ($this->mimeString) {
+            case 'image/jpeg':
+                $this->resource = imagecreatefromjpeg($this->path);
+                break;
+            case 'image/png':
+                $this->resource = imagecreatefrompng($this->path);
+                break;
+            case 'image/gif':
+                $this->resource = imagecreatefromgif($this->path);
+                break;
+            default:
+                throw new InvalidArgumentException("File type {$this->resource} is not supported.");
+        }
+
+        return $this->resource;
+
     }
 
     /**
-     * @return mixed
+     * @param int $degrees
+     * @return bool
      */
-    public function getType()
-    {
-        return $this->type;
-    }
+    abstract public function rotate(int $degrees) : bool;
 
-    /**
-     * rotate image depends of degrees
-     * @param $degrees
-     */
-    public function rotate($degrees)
-    {
-        if (exif_imagetype($this->path) == IMAGETYPE_JPEG || exif_imagetype($this->path) == IMAGETYPE_JPG) {
-            $source = imagecreatefromjpeg($this->path);
-            $rotate = imagerotate($source, $degrees, 0);
-            imagejpeg($rotate,$this->path);
-        }
-
-        if (exif_imagetype($this->path) == IMAGETYPE_PNG) {
-            $source = imagecreatefrompng($this->path);
-            $rotate = imagerotate($source, $degrees, 0);
-            imagesavealpha($rotate, true);
-            imagepng($rotate,$this->path);
-        }
-
-        if (exif_imagetype($this->path) == IMAGETYPE_GIF) {
-            $source = imagecreatefromgif($this->path);
-            $rotate = imagerotate($source, $degrees, 0);
-            imagegif($rotate,$this->path);
-        }
-    }
 }
