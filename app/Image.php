@@ -1,15 +1,12 @@
 <?php
 namespace App;
 
-use InvalidArgumentException;
-
 abstract class Image
 {
     protected $name;
     protected $path;
     protected $width;
     protected $height;
-    protected $mimeString;
     protected $resource;
 
     /**
@@ -19,7 +16,6 @@ abstract class Image
     public function __construct($path)
     {
         $this->path = $path;
-        $this->mimeString = mime_content_type($path);
     }
 
     /**
@@ -68,25 +64,7 @@ abstract class Image
     /**
      * @return resource
      */
-    protected function getResource() : resource
-    {
-        switch ($this->mimeString) {
-            case 'image/jpeg':
-                $this->resource = imagecreatefromjpeg($this->path);
-                break;
-            case 'image/png':
-                $this->resource = imagecreatefrompng($this->path);
-                break;
-            case 'image/gif':
-                $this->resource = imagecreatefromgif($this->path);
-                break;
-            default:
-                throw new InvalidArgumentException("File type {$this->resource} is not supported.");
-        }
-
-        return $this->resource;
-
-    }
+    abstract public function getResource();
 
     /**
      * @param int $degrees
