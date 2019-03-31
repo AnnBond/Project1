@@ -15,4 +15,9 @@ class GifImage extends Image
 
         return imagegif($rotate,$this->path);
     }
+
+    public function getResource()
+    {
+        return imagecreatefromgif($this->path);
+    }
 }

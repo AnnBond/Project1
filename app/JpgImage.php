@@ -15,4 +15,10 @@ class JpgImage extends Image
 
         return imagejpeg($rotate,$this->path);
     }
+
+    public function getResource()
+    {
+        return imagecreatefromjpeg($this->path);
+    }
+
 }

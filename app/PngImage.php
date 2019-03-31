@@ -16,4 +16,9 @@ class PngImage extends Image
 
         return imagepng($rotate,$this->path);
     }
+
+    public function getResource()
+    {
+       return imagecreatefrompng($this->path);
+    }
 }
