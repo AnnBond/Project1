@@ -31,15 +31,8 @@ class ImagesParser implements Parser
         $fileList = glob($this->path . "/*.{jpg,gif,png}", GLOB_BRACE);
 
         foreach ($fileList as $file) {
-            if (exif_imagetype($file) == IMAGETYPE_JPEG) {
-                $image = new JpgImage($file);
-            } elseif (exif_imagetype($file) == IMAGETYPE_PNG) {
-                $image = new PngImage($file);
-            } elseif (exif_imagetype($file) == IMAGETYPE_GIF) {
-                $image = new GifImage($file);
-            } else {
-                die("Sorry, we don't support this format.\n");
-            }
+
+            $image = ImageFactory::create($file);
 
             $this->images[] = $image;
         }
