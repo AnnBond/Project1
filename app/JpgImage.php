@@ -16,7 +16,11 @@ class JpgImage extends Image
         return imagejpeg($rotate,$this->path);
     }
 
-    public function getResource()
+    /**
+     * @inheritdoc
+     * @return resource
+     */
+    protected function getResource()
     {
         return imagecreatefromjpeg($this->path);
     }

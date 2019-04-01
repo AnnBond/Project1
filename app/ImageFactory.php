@@ -5,7 +5,11 @@ use UnexpectedValueException;
 
 class ImageFactory
 {
-
+    /**
+     * Factory for creating Images depends of format
+     * @param $file
+     * @return mixed
+     */
     public static function create($file)
     {
         preg_match("/.(\w+)$/", $file, $matches);
