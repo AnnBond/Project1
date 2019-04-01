@@ -21,7 +21,7 @@ abstract class Image
     /**
      * @return mixed
      */
-    private function getName() : string
+    public function getName() : string
     {
         $this->name = basename($this->path);
 
@@ -31,7 +31,7 @@ abstract class Image
     /**
      * @return mixed
      */
-    private function getWidth() : string
+    public function getWidth() : string
     {
         $data = getimagesize($this->path);
         $this->width = $data[0];
@@ -42,7 +42,7 @@ abstract class Image
     /**
      * @return mixed
      */
-    private function getHeight() : string
+    public function getHeight() : string
     {
         $data = getimagesize($this->path);
         $this->height = $data[1];
@@ -51,20 +51,10 @@ abstract class Image
     }
 
     /**
-     * print information about image
-     */
-    public function getInfo()
-    {
-        echo "File name: ". $this->getName() . ";";
-        echo " Width: ".  $this->getWidth() . ";";
-        echo " Height: ". $this->getheight() . ";";
-        echo "\n";
-    }
-
-    /**
+     * Create a new image from file depends of format
      * @return resource
      */
-    abstract public function getResource();
+    abstract protected function getResource();
 
     /**
      * @param int $degrees

@@ -21,7 +21,11 @@ class ImagesPrinter implements Printer {
     {
         foreach ($this->images as $image) {
             $image->rotate(180);
-            $image->getInfo();
+
+            echo "File name: ". $image->getName() . ";";
+            echo " Width: ".  $image->getWidth() . ";";
+            echo " Height: ". $image->getheight() . ";";
+            echo "\n";
         }
     }
 }
