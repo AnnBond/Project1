@@ -14,12 +14,15 @@ class ImageFactory
     {
         preg_match("/.(\w+)$/", $file, $matches);
 
-        $product = "App\\" . ucfirst($matches[1] . "Image");
+        $image = "App\\" . ucfirst($matches[1] . "Image");
 
-        if (class_exists($product)) {
-            return new  $product($file);
+        if (class_exists($image)) {
+            $image = new $image($file);
+            $proxy = new NewImageNameFormat($image);
+
+            return $proxy;
         } else {
-            throw new UnexpectedValueException("Undefined product");
+            throw new UnexpectedValueException("Undefined image");
         }
     }
 }
