@@ -23,16 +23,10 @@ class ImagesPrinter implements Printer
     {
         foreach ($this->images as $image) {
             $image->rotate(180);
-            if (preg_match("/^(.*)_(\d+)x(\d+).*/", $image->getName(), $matches)) {
-                echo "File name: " . $matches[0] . ";";
-                echo " Width: " . $matches[2] . ";";
-                echo " Height: " . $matches[3] . ";";
-                echo "\n";
-                break;
-            }
+
             echo "File name: " . $image->getName() . ";";
             echo " Width: " . $image->getWidth() . ";";
-            echo " Height: " . $image->getheight() . ";";
+            echo " Height: " . $image->getHeight() . ";";
             echo "\n";
         }
     }
