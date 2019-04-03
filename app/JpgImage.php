@@ -3,6 +3,16 @@ namespace App;
 
 class JpgImage extends Image
 {
+
+    /**
+     * JpgImage constructor.
+     * @param $path
+     */
+    public function __construct($path)
+    {
+        $this->path = $path;
+    }
+
     /**
      * Rotate JPG Images
      * @param int $degrees

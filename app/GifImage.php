@@ -4,6 +4,15 @@ namespace App;
 class GifImage extends Image
 {
     /**
+     * GifImage constructor.
+     * @param $path
+     */
+    public function __construct($path)
+    {
+        $this->path = $path;
+    }
+
+    /**
      * Rotate GIF Images
      * @param int $degrees
      * @return bool

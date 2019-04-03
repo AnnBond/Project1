@@ -3,6 +3,16 @@ namespace App;
 
 class PngImage extends Image
 {
+
+    /**
+     * PngImage constructor.
+     * @param $path
+     */
+    public function __construct($path)
+    {
+        $this->path = $path;
+    }
+
     /**
      * Rotate PNG Images
      * @param int $degrees
