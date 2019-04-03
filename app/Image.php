@@ -3,51 +3,35 @@ namespace App;
 
 abstract class Image
 {
-    protected $name;
     protected $path;
-    protected $width;
-    protected $height;
     protected $resource;
 
     /**
-     * Image constructor.
-     * @param $path
-     */
-    public function __construct($path)
-    {
-        $this->path = $path;
-    }
-
-    /**
-     * @return mixed
+     * @return string
      */
     public function getName() : string
     {
-        $this->name = basename($this->path);
-
-        return $this->name;
+        return basename($this->path);
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getWidth() : string
     {
         $data = getimagesize($this->path);
-        $this->width = $data[0];
+        return $data[0];
 
-        return $this->width;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getHeight() : string
     {
         $data = getimagesize($this->path);
-        $this->height = $data[1];
+        return $data[1];
 
-        return $this->height;
     }
 
     /**
