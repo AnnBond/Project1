@@ -23,9 +23,9 @@ class NewImageNameFormat extends Image
 
         if(!empty($name)) {
             return $name[0];
-        } else {
-            return $this->image->getName();
         }
+
+        return $this->image->getName();
     }
 
     /**
@@ -37,9 +37,9 @@ class NewImageNameFormat extends Image
 
         if(!empty($width)) {
             return $width[2];
-        } else {
-            return $this->image->getWidth();
         }
+
+        return $this->image->getWidth();
     }
 
     /**
@@ -51,9 +51,9 @@ class NewImageNameFormat extends Image
 
         if(!empty($height)) {
             return $height[3];
-        } else {
-            return $this->image->getHeight();
         }
+
+        return $this->image->getHeight();
     }
 
     /**
