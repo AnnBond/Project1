@@ -8,9 +8,9 @@ class ImageFactory
     /**
      * Factory for creating Images depends of format
      * @param $file
-     * @return mixed
+     * @return Image
      */
-    public static function create($file)
+    public static function create(string $file) : Image
     {
         preg_match("/.(\w+)$/", $file, $matches);
 
